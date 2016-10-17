@@ -49,7 +49,7 @@ public class BlankFragment extends Fragment {
         helper = new DBOpenHelper(this.getActivity());
         db = helper.getReadableDatabase();
         cursor = db.query("plan",COLUMNS,null,null,null,null,null);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getActivity(),R.layout.support_simple_spinner_dropdown_item,cursor,new String[]{"title"},new int[]{R.id.title_item},0);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getActivity(),R.layout.listview_item,cursor,new String[]{"title"},new int[]{R.id.title_item},0);
         
         listView.setAdapter(adapter);
         initSwipmenu();
@@ -72,9 +72,9 @@ public class BlankFragment extends Fragment {
                 // set item title
                 openItem.setTitle("Open");
                 // set a icon
-                openItem.setIcon(R.drawable.gray_circle);
+                //openItem.setIcon(R.drawable.gray_circle);
                 // set item title fontsize
-                openItem.setTitleSize(1);
+                openItem.setTitleSize(16);
                 // set item title font color
                 openItem.setTitleColor(Color.WHITE);
                 // add to menu
@@ -88,9 +88,11 @@ public class BlankFragment extends Fragment {
                         0x3F, 0x25)));
                 // set item width
                 deleteItem.setWidth(dp2px(90));
-                deleteItem.setTitle("de");
+                deleteItem.setTitle("DELETE");
+                deleteItem.setTitleSize(16);
+                deleteItem.setTitleColor(Color.WHITE);
                 // set a icon
-                deleteItem.setIcon(R.drawable.ic_note_add_white_48dp);
+                //deleteItem.setIcon(R.drawable.ic_note_add_white_48dp);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }
