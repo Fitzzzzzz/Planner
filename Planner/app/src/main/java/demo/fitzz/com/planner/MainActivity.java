@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tab);
         mViewpager = (MyViewPager) findViewById(R.id.viewPager);
         myAdapter = new MyAdapter(getSupportFragmentManager());
+        mViewpager.setOffscreenPageLimit(3);
         mViewpager.setAdapter(myAdapter);
         mViewpager.setScrollble(false);
         mTabLayout.setupWithViewPager(mViewpager);

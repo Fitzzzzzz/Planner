@@ -7,6 +7,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import layout.BlankFragment;
+import layout.Fragment_eating;
+import layout.Fragment_meeting;
+import layout.Fragment_travel;
+import layout.fragment_default;
 
 /**
  * Created by fitzz on 16-8-15.
@@ -16,11 +20,19 @@ public class MyAdapter extends FragmentStatePagerAdapter {
     public MyAdapter(FragmentManager fm) {
         super(fm);
     }
+    private Fragment fragment;
 
     @Override
     public Fragment getItem(int position) {
         Log.d("getItem", "!!!");
-        return new BlankFragment();
+        switch (position){
+            case 1 : fragment = new Fragment_meeting();break;
+            case 2 : fragment = new Fragment_eating();break;
+            case 3 : fragment = new Fragment_travel();break;
+            case 4 : fragment = new fragment_default();break;
+            case 0 : fragment = new BlankFragment();break;
+        }
+        return fragment;
     }
 
     @Override

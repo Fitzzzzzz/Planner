@@ -9,15 +9,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.cjj.MaterialHeadView;
 
 import demo.fitzz.com.planner.R;
 import tools.DBOpenHelper;
 import tools.SwipMenuAndRefresh;
+public class fragment_default extends Fragment {
 
-
-public class BlankFragment extends Fragment {
     SwipeMenuListView listView;
     private SwipMenuAndRefresh swipMenuAndRefresh;
     private DBOpenHelper helper;
@@ -29,22 +28,21 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false);
+        return inflater.inflate(R.layout.fragment_fragment_default, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        listView = (SwipeMenuListView) getActivity().findViewById(R.id.listView);
+        listView = (SwipeMenuListView) getActivity().findViewById(R.id.listView_default);
         swipMenuAndRefresh = new SwipMenuAndRefresh(getActivity(),listView);
         helper = new DBOpenHelper(this.getActivity());
         db = helper.getReadableDatabase();
-        cursor = db.query("plan",COLUMNS,"classify=?",new String[]{"0"},null,null,null);
+        cursor = db.query("plan",COLUMNS,null,null,null,null,null);
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getActivity(),R.layout.listview_item,cursor,new String[]{"title"},new int[]{R.id.title_item},0);
         swipMenuAndRefresh.initSwipMenu();
         swipMenuAndRefresh.initRefresh();
         listView.setAdapter(adapter);
         Log.d("onStart", "!!!");
     }
-
 }
