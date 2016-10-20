@@ -3,6 +3,7 @@ package tools;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 
+import demo.fitzz.com.planner.MainActivity;
 import demo.fitzz.com.planner.R;
 
 /**
@@ -20,8 +22,10 @@ import demo.fitzz.com.planner.R;
  */
 public class SwipMenuAndRefresh {
 
-    Activity activity;
-    SwipeMenuListView listView;
+    private Activity activity;
+    private SwipeMenuListView listView;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public SwipMenuAndRefresh(Activity activity,SwipeMenuListView listView){
         this.activity = activity;
@@ -92,18 +96,15 @@ public class SwipMenuAndRefresh {
         final float scale = activity.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
-    public void initRefresh() {
-        MaterialRefreshLayout layout = (MaterialRefreshLayout) activity.findViewById(R.id.refresh);
-        layout.setMaterialRefreshListener(new MaterialRefreshListener() {
-            @Override
-            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
-                Toast.makeText(activity,"refresh",Toast.LENGTH_SHORT).show();
-                materialRefreshLayout.finishRefresh();
-            }
+    public void initRefresh(int id) {
 
+        swipeRefreshLayout = (SwipeRefreshLayout) activity.findViewById(id);
+        swipeRefreshLayout.setColorSchemeResources(R.color.material_blue,R.color.material_red,R.color.material_green);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                materialRefreshLayout.finishRefreshLoadMore();
+            public void onRefresh() {
+                MainActivity.myAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

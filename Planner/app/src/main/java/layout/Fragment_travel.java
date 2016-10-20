@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import demo.fitzz.com.planner.R;
+import tools.AddDataToList;
 import tools.DBOpenHelper;
 import tools.SwipMenuAndRefresh;
 
@@ -20,6 +21,7 @@ import tools.SwipMenuAndRefresh;
 public class Fragment_travel extends Fragment {
     SwipeMenuListView listView;
     private SwipMenuAndRefresh swipMenuAndRefresh;
+    private AddDataToList addDataToList;
     private DBOpenHelper helper;
     private Cursor cursor;
     private SQLiteDatabase db;
@@ -37,13 +39,10 @@ public class Fragment_travel extends Fragment {
         super.onStart();
         listView = (SwipeMenuListView) getActivity().findViewById(R.id.listView_travel);
         swipMenuAndRefresh = new SwipMenuAndRefresh(getActivity(),listView);
-        helper = new DBOpenHelper(this.getActivity());
-        db = helper.getReadableDatabase();
-        cursor = db.query("plan",COLUMNS,"classify=?",new String[]{"3"},null,null,null);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getActivity(),R.layout.listview_item,cursor,new String[]{"title"},new int[]{R.id.title_item},0);
+        addDataToList = new AddDataToList(this.getActivity(),listView,"3");
         swipMenuAndRefresh.initSwipMenu();
-        swipMenuAndRefresh.initRefresh();
-        listView.setAdapter(adapter);
+        swipMenuAndRefresh.initRefresh(R.id.refresh_travel);
+        addDataToList.addDataToList();
         Log.d("onStart", "!!!");
     }
 }

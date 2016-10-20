@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import demo.fitzz.com.planner.R;
+import tools.AddDataToList;
 import tools.DBOpenHelper;
 import tools.SwipMenuAndRefresh;
-public class fragment_default extends Fragment {
+public class Fragment_done extends Fragment {
 
     SwipeMenuListView listView;
     private SwipMenuAndRefresh swipMenuAndRefresh;
@@ -23,26 +24,25 @@ public class fragment_default extends Fragment {
     private Cursor cursor;
     private SQLiteDatabase db;
     private final String[] COLUMNS = new String[]{"_id","title","detail","isDone","classify","importance"};
+    private AddDataToList addDataToList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_default, container, false);
+        return inflater.inflate(R.layout.fragment_fragment_done, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        listView = (SwipeMenuListView) getActivity().findViewById(R.id.listView_default);
+        listView = (SwipeMenuListView) getActivity().findViewById(R.id.listView_done);
         swipMenuAndRefresh = new SwipMenuAndRefresh(getActivity(),listView);
-        helper = new DBOpenHelper(this.getActivity());
-        db = helper.getReadableDatabase();
-        cursor = db.query("plan",COLUMNS,null,null,null,null,null);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getActivity(),R.layout.listview_item,cursor,new String[]{"title"},new int[]{R.id.title_item},0);
+        addDataToList = new AddDataToList(this.getActivity(),listView,null);
+
         swipMenuAndRefresh.initSwipMenu();
-        swipMenuAndRefresh.initRefresh();
-        listView.setAdapter(adapter);
+        swipMenuAndRefresh.initRefresh(R.id.refresh_done);
+        addDataToList.addDataToList();
         Log.d("onStart", "!!!");
     }
 }

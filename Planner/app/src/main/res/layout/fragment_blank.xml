@@ -1,17 +1,14 @@
-<com.cjj.MaterialRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/refresh"
+
+<android.support.v4.widget.SwipeRefreshLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/refresh_blank"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:isLoadMore="true">
+<com.baoyz.swipemenulistview.SwipeMenuListView
+    android:id="@+id/listView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:isLoadMore="true">
+    android:layout_height="wrap_content"       /> >
+</android.support.v4.widget.SwipeRefreshLayout>
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"        >
-
-    </com.baoyz.swipemenulistview.SwipeMenuListView>
-
-</com.cjj.MaterialRefreshLayout>

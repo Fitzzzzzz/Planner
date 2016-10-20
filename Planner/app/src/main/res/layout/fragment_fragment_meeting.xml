@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="layout.Fragment_meeting">
 
-    <com.cjj.MaterialRefreshLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refresh"
+        android:id="@+id/refresh_meeting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:isLoadMore="true">
@@ -20,7 +20,7 @@
 
         </com.baoyz.swipemenulistview.SwipeMenuListView>
 
-    </com.cjj.MaterialRefreshLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>
